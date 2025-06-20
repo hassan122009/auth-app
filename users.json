@@ -1,0 +1,16 @@
+[
+  {
+    "username": "hassan",
+    "password": "123456",
+    "fullname": "حسن عمرو",
+    "email": "hassan@example.com",
+    "phone": "01012345678"
+  },
+  {
+    "username": "sara",
+    "password": "abcdef",
+    "fullname": "سارة خالد",
+    "email": "sara@example.com",
+    "phone": "01087654321"
+  }
+]

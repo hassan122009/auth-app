@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ملف المستخدم</title>
+  <style>
+    body {
+      font-family: 'Tahoma';
+      background: #fdfdfd;
+      padding: 40px;
+    }
+    .profile-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px #aaa;
+    }
+    .logout {
+      margin-top: 20px;
+      background: #e74c3c;
+    }
+    button {
+      padding: 10px 15px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="profile-box">
+  <h2>أهلاً <span id="fullname"></span></h2>
+  <p>📧 البريد الإلكتروني: <span id="email"></span></p>
+  <p>📱 رقم الهاتف: <span id="phone"></span></p>
+  <button class="logout" onclick="logout()">تسجيل الخروج</button>
+</div>
+
+<script>
+  async function loadUser() {
+    const username = localStorage.getItem('loggedInUser');
+    if (!username) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    const res = await fetch('users.json');
+    const users = await res.json();
+    const user = users.find(u => u.username === username);
+
+    if (user) {
+      document.getElementById('fullname').textContent = user.fullname;
+      document.getElementById('email').textContent = user.email;
+      document.getElementById('phone').textContent = user.phone;
+    } else {
+      window.location.href = 'login.html';
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('loggedInUser');
+    window.location.href = 'login.html';
+  }
+
+  loadUser();
+</script>
+
+</body>
+</html>
